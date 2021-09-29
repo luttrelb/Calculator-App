@@ -1,5 +1,7 @@
 #!usr/bin/env node
 
+const { stringify } = require('querystring');
+
 const readline = require('readline').createInterface( { 
 	input: process.stdin,
 	output: process.stdout
@@ -9,37 +11,59 @@ let total = 0;
 let symbol;
 
 
+
 console.log("Welcome to Running Calc.js");
 
 enterOperand()
 
 
+
 function addUpdateTotal(value){
-    
-    total = parseFloat(total) + parseFloat(value);
-    console.log("Current Total: " + total);
-    enterOperand(symbol)
+    if (isNaN(value) == false) {
+        total = parseFloat(total) + parseFloat(value);
+        console.log("Current Total: " + total);
+        enterOperand(symbol)
+    }
+    else{
+        console.log("Value must be an integer!")
+        operand();
+    }
 } 
 
 function subtractUpdateTotal(value){
-    
-    total = parseFloat(total) - parseFloat(value);
-    console.log("Current Total: " + total);
-    enterOperand(symbol)
-} 
-
-function divideUpdateTotal(value){
-    
-    total = parseFloat(total) / parseFloat(value);
-    console.log("Current Total: " + total);
-    enterOperand(symbol)
+    if (isNaN(value) == false) {
+        total = parseFloat(total) - parseFloat(value);
+        console.log("Current Total: " + total);
+        enterOperand(symbol)
+    }
+    else{
+        console.log("Value must be an integer!")
+        operand();
+    }
 } 
 
 function multiplyUpdateTotal(value){
-    
-    total = parseFloat(total) * parseFloat(value);
-    console.log("Current Total: " + total);
-    enterOperand(symbol)
+    if (isNaN(value) == false) {
+        total = parseFloat(total) * parseFloat(value);
+        console.log("Current Total: " + total);
+        enterOperand(symbol)
+    }
+    else{
+        console.log("Value must be an integer!")
+        operand();
+    }
+} 
+
+function divideUpdateTotal(value){
+    if (isNaN(value) == false) {
+        total = parseFloat(total) / parseFloat(value);
+        console.log("Current Total: " + total);
+        enterOperand(symbol)
+    }
+    else{
+        console.log("Value must be an integer!")
+        operand();
+    }
 } 
 
 function enterOperand(){
