@@ -1,63 +1,70 @@
 #!usr/bin/env node
-const readline = require('readline');
-const rl = require('readline').createInterface( { 
+
+const readline = require('readline').createInterface( { 
 	input: process.stdin,
 	output: process.stdout
 });
 
-let input, total = 0;
+let total = 0;
+let symbol;
+
 
 console.log("Welcome to Running Calc.js");
 
+enterOperand()
 
 
-console.log("Current Total: " + total);
-
-
-function calculator(input, total){
-    rl.question('Enter operation: (+-*/, q to quit)',
-    (operation) => { console.log('Enter Value: ')});
-
-    rl.close();
+function addUpdateTotal(value){
     
-    rl.question('Enter Value: ', input => calc(input, operation));
-    console.log('Current total: ', total);
+    total = parseFloat(total) + parseFloat(value);
+    console.log("Current Total: " + total);
+    enterOperand(symbol)
+} 
+
+function subtractUpdateTotal(value){
+    
+    total = parseFloat(total) - parseFloat(value);
+    console.log("Current Total: " + total);
+    enterOperand(symbol)
+} 
+
+function divideUpdateTotal(value){
+    
+    total = parseFloat(total) / parseFloat(value);
+    console.log("Current Total: " + total);
+    enterOperand(symbol)
+} 
+
+function multiplyUpdateTotal(value){
+    
+    total = parseFloat(total) * parseFloat(value);
+    console.log("Current Total: " + total);
+    enterOperand(symbol)
+} 
+
+function enterOperand(){
+    readline.question("Enter the operation (+-*/, q to quit):", (symbol) => {operand(symbol)});
 }
 
-// function op(operation){
-//     console.log(operation);
-// }
-
-function calc(input, operation, total){
-    if(operation == 'q'){
-        readline.close();
+function operand(symbol) {
+    if (symbol == "q") {
+        console.log("Final Value: " + total)
+        readline.close()
     }
-    else if(operation == '+'){
-        total = total + input;
-        input = 0;
+    else if (symbol == "+") {
+        readline.question("Enter the value: ", (value) => {addUpdateTotal(value)} );
     }
-    else if(operation == '-'){
-        total = total - input;
-        input = 0;
+    else if (symbol == "-") {
+        readline.question("Enter the value: ", (value) => {subtractUpdateTotal(value)} );
     }
-    else if(operation == '*'){
-        total = total * input;
-        input = 0;
+    else if (symbol == "/") {
+        readline.question("Enter the value: ", (value) => {divideUpdateTotal(value)} );
     }
-    else if(operation == '/'){
-        total = total / input;
-        input = 0;
+    else if (symbol == "*") {
+        readline.question("Enter the value: ", (value) => {multiplyUpdateTotal(value)} );
     }
-    calculator(input,total);
+    else {
+        console.log("Must enter +, -, *, /, or q");
+        enterOperand()
+    }
 }
-
-calculator(input, total)
-
-
-/* const readline = require('readline').createInterface( { 
-	input: process.stdin,
-	output: process.stdout
-});
-
-readline.question("Enter the operation:", (total) => { console.log("work please")});
- */
